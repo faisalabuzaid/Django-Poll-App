@@ -10,15 +10,6 @@ class Poll(models.Model):
     pub_date = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
 
-    def user_can_vote(self, user):
-        """ 
-        Return False if user already voted
-        """
-        user_votes = user.vote_set.all()
-        qs = user_votes.filter(poll=self)
-        if qs.exists():
-            return False
-        return True
 
     @property
     def get_vote_count(self):
